@@ -8,8 +8,10 @@ require 'json'
 class Cat < Sinatra::Application
   configure do
     set :csv_url, "http://batchsubmit.auctions.yahoo.co.jp/html/category.csv"
-    set :csv_store, File.join(File.dirname(__FILE__), "cache", "category.csv")
-    set :json_store, File.join(File.dirname(__FILE__), "cache", "category.json")
+    set :store_dir, File.join(settings.root, "tmp")
+    set :csv_store, File.join(settings.store_dir, "category.csv")
+    set :json_store, File.join(settings.store_dir, "category.json")
+    set :allow_control_access_origin, ENV['allow_control_access_origin'] || '*'
   end
 
   configure :development do
@@ -18,6 +20,7 @@ class Cat < Sinatra::Application
   end
   
   def download
+    Dir.mkdir(settings.store_dir) unless FileTest.exist? settings.store_dir
     open(settings.csv_store, 'w') do |store|
       open(settings.csv_url, 'r') {|csv| store.write(csv.read) }
     end
@@ -67,6 +70,7 @@ class Cat < Sinatra::Application
   end
 
   get '/' do
+    response['Access-Control-Allow-Origin'] = settings.allow_control_access_origin
     content_type :json
     @json.read
   end
@@ -80,7 +84,7 @@ class Cat < Sinatra::Application
 
     halt 404 if results.nil?
 
-    response['Access-Control-Allow-Origin'] = "*"
+    response['Access-Control-Allow-Origin'] = settings.allow_control_access_origin
     content_type :json
     results.to_json
   end
@@ -94,6 +98,7 @@ class Cat < Sinatra::Application
     
     halt 404 if results.nil?
 
+    response['Access-Control-Allow-Origin'] = settings.allow_control_access_origin
     content_type :json
     results.to_json
   end
