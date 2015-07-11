@@ -1,0 +1,122 @@
+@charset "utf-8";
+
+@import "normalize";
+@import "csstyle";
+
+body {
+  font-size: 14px;
+}
+
+@include component(container) {
+  overflow: hidden;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@include location(header) {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 200px;
+  height: 100%;
+  overflow: hidden;
+  background: #e22121;
+
+  @include component(container) {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+
+  @include component(heading) {
+    line-height: 1;
+    color: #fff;
+    padding: 24px 12px;
+    border-bottom: 1px solid #fff;
+  }
+}
+
+@include component(heading) {
+  padding: 0;
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+}
+
+@include component(input) {
+  @include part(text) {
+    box-sizing: border-box;
+    padding: 3px 0 3px 3px;
+    border: 1px solid #ddd;
+    outline: none;
+    width: auto;
+
+    &:focus {
+      border: 1px solid rgba(81, 203, 238, 1);
+    }
+
+    @include option(wide) {
+      width: 100%;
+    }
+  }
+}
+
+@include tweak(luminous) {
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  }
+}
+
+@include component(link) {
+  text-decoration: border;
+
+  &:link, &:visited {
+    color: #4a90e2;
+  }
+
+  &:hover, &:active {
+    color: #316199;
+  }
+}
+
+@include component(listItem) {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 1px;
+  
+  @include part(head) {
+    display: inline-block;
+    text-decoration: none;
+    padding: 15px;
+    text-align: center;
+    box-sizing: border-box;
+    min-width: 124px;
+    background: #dcdcdc;
+    color: #4a4a4a;
+    
+    &:hover {
+      color: #fff;
+      background: #e22121;
+    }
+  }
+
+  @include part(content) {
+    padding-left: 8px;
+  }
+}
+
+
+list {
+  position: relative;
+  left: 0;
+  top: 0;
+  margin-left: 200px;
+
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+}
+

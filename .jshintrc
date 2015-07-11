@@ -1,0 +1,18 @@
+{
+  "strict": true,
+  "indent": 2,
+  "maxlen": 80,
+  "unused": true,
+  "undef": true,
+  "browser": true,
+  "devel": true,
+  "debug": true,
+  "globals": {
+    "jQuery": true
+  },
+  "expr": true,
+  "esnext": true,
+  "node": true,
+  "mocha": true,
+  "proto": true
+}
