@@ -434,6 +434,11 @@ body {
   .listItem__content {
     padding-left: 8px; }
 
+.message {
+  padding: 12px 0;
+  color: #fff;
+  font-size: 1rem; }
+
 .credit {
   box-sizing: border-box;
   width: 100%;
