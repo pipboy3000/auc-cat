@@ -59,6 +59,7 @@ function watch() {
 gulp.task('clean', function(cb) { del([$.dist], cb); });
 gulp.task('jsBuild', function() { return compile(); });
 gulp.task('jsWatch', function() { return watch(); });
+gulp.task('setProduction', function() {$.env = 'production'; });
 
 gulp.task('serve', function() {
   browserSync.init({
@@ -89,14 +90,17 @@ gulp.task('sass', function() {
 
 gulp.task('html', function() {
   gulp.src($.html)
-  .pipe(gulp.dest($.dist));
+      .pipe(gulp.dest($.dist));
 });
 
-gulp.task('deploy', function(cb) {
-  $.env = "production";
+gulp.task('production', function(cb) {
+  $.env = 'production';
   runSequence('clean', ['html', 'sass', 'jsBuild'], cb);
-  // return gulp.src('./dist/**/*')
-  //            .pipe(ghPages());
+});
+
+gulp.task('deploy', function() {
+  gulp.src($.dist + "**/*")
+      .pipe(ghPages());
 });
 
 gulp.task('default', function(cb) {

@@ -5,6 +5,7 @@
 
 body {
   font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 @include component(container) {
@@ -38,7 +39,7 @@ body {
 @include component(heading) {
   padding: 0;
   margin: 0 0 1rem 0;
-  font-size: 2rem;
+  font-size: 2.2rem;
 }
 
 @include component(input) {
@@ -107,6 +108,23 @@ body {
   }
 }
 
+@include component(credit) {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 12px;
+  position: absolute;
+  font-size: 0.85rem;
+  left: 0;
+  bottom: 0;
+  color: #dcdcdc;
+  color: #fff;
+
+  a {
+    color: rgb(228, 228, 62);
+    text-decoration: none;
+  }
+}
+
 
 list {
   position: relative;
@@ -119,4 +137,3 @@ list {
     padding: 0;
   }
 }
-

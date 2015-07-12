@@ -4,6 +4,11 @@
 
     <div class="container">
       <input class="input__text +luminous" type="text" name="keyword" placeholder="search keyword">
+      
+      <div class="credit">
+        Build by <a href="https://twitter.com/count0">@count0</a> &copy; 2015<br>
+        license under <a href="https://raw.githubusercontent.com/pipboy3000/auc-cat/master/LICENSE">MIT</a>
+      </div>
     </div>
   </div>
 
