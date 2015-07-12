@@ -12,4 +12,8 @@
       overflow: hidden;
     }
   </style>
+
+  this.on('update', data => {
+    if (data) this.opts.data = data
+  })
 </list>
