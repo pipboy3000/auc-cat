@@ -20,7 +20,7 @@ var listTags = riot.mount('list');
 function Results() {
   riot.observable(this);
 
-  this.on('update', function(data) {
+  this.on('update', data => {
     listTags[0].update(data);
   });
 }

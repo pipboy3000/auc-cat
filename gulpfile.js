@@ -3,6 +3,7 @@
 
 var autoprefixer = require('gulp-autoprefixer');
 var browserify   = require('browserify');
+var babelify     = require('babelify');
 var browserSync  = require('browser-sync').create();
 var buffer       = require('vinyl-buffer');
 var del          = require('del');
@@ -30,6 +31,7 @@ var $ = {
 function compile(watch) {
   var bundler  = watchify(browserify($.app), {debug: true})
                     .transform(envify({NODE_ENV: $.env}))
+                    .transform(babelify)
                     .transform(riot, {type: 'es6'});
 
   function rebundle() {
