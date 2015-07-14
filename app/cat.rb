@@ -79,7 +79,7 @@ class Cat < Sinatra::Application
     halt 404, 'No keyword given' if params[:keyword].nil?
 
     results = @data.select do |item|
-      item[:title].include? params[:keyword]
+      item[:title].downcase.include? params[:keyword].downcase
     end
 
     halt 404 if results.nil?
