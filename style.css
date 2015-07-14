@@ -394,12 +394,6 @@ body {
   .input__text.\--wide {
     width: 100%; }
 
-#csstyle .\+luminous {
-  -webkit-transition: all 0.3s ease-in-out;
-  transition: all 0.3s ease-in-out; }
-  #csstyle .\+luminous:focus {
-    box-shadow: 0 0 5px #51cbee; }
-
 .link {
   text-decoration: border; }
   .link:link, .link:visited {
@@ -437,7 +431,21 @@ body {
 .message {
   padding: 12px 0;
   color: #fff;
-  font-size: 1rem; }
+  font-size: 1rem;
+  overflow: hidden; }
+  .message__text {
+    position: relative;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; }
+    .message__text.\--show {
+      -webkit-animation-name: show;
+      animation-name: show; }
 
 .credit {
   box-sizing: border-box;
@@ -453,6 +461,16 @@ body {
     color: #e4e43e;
     text-decoration: none; }
 
+#csstyle .\+luminous {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out; }
+  #csstyle .\+luminous:focus {
+    box-shadow: 0 0 5px #51cbee; }
+
+list, message {
+  display: block;
+  overflow: hidden; }
+
 list {
   position: relative;
   left: 0;
@@ -461,3 +479,27 @@ list {
   list ul {
     margin: 0;
     padding: 0; }
+
+@-webkit-keyframes show {
+  0% {
+    top: -2rem; }
+  100% {
+    top: 0; } }
+
+@keyframes show {
+  0% {
+    top: -2rem; }
+  100% {
+    top: 0; } }
+
+@-webkit-keyframes hidden {
+  0% {
+    top: 0; }
+  100% {
+    top: 2rem; } }
+
+@keyframes hidden {
+  0% {
+    top: 0; }
+  100% {
+    top: 2rem; } }
