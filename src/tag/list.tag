@@ -6,13 +6,6 @@
     </li>
   </ul>
 
-  <style scoped>
-    :scope {
-      display: block;
-      overflow: hidden;
-    }
-  </style>
-
   this.on('update', data => {
     if (data) this.opts.data = data
   })

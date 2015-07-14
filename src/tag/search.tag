@@ -1,10 +1,9 @@
 <search>
   <input class="input__text +luminous" type="text" name="keyword" placeholder="search keyword">
-  <div class="message">{this.message}</div>
 
   var Bacon = require('baconjs')
   var request = require('superagent')
-
+  
   var keywordValue = () => {
     return Bacon.fromEvent(this.keyword, 'keyup')
                 .throttle(1500)
@@ -14,25 +13,28 @@
                 .toProperty()
   }
 
+  var loadingBus = new Bacon.Bus()
+  loadingBus.plug(keywordValue())
+  loadingBus.onValue(keyword => {
+    opts.observer.trigger('messageUpdate', `Search keyword ${keyword}`);
+  })
+
   var keywordBus = new Bacon.Bus()
   keywordBus.plug(keywordValue())
-  keywordBus.onValue((keyword) => {
+  keywordBus.onValue(keyword => {
     request.get(`${opts.uri}/search/keyword/${keyword}`)
     .end((err, res) => {
-      if (err) {
-        this.message = err
-      }
+      if (err) opts.observer.trigger('messageUpdate', err)
 
       if (res.status === 200) {
         if (res.body.length > 0) {
-          this.message = `${res.body.length} Hit!`
+          opts.observer.trigger('messageUpdate', `${res.body.length} Hit!`)
         } else {
-          this.message = "Not found..."
+          opts.observer.trigger('messageUpdate', "Not found...")
         }
-        opts.observer.trigger('update', res.body);
+        opts.observer.trigger('listUpdate', res.body);
       }
-
-      this.update()
     })
   })
+
 </search>

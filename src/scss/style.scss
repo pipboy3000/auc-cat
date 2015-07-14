@@ -60,14 +60,6 @@ body {
   }
 }
 
-@include tweak(luminous) {
-  transition: all 0.3s ease-in-out;
-
-  &:focus {
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
-  }
-}
-
 @include component(link) {
   text-decoration: border;
 
@@ -112,6 +104,19 @@ body {
   padding: 12px 0;
   color: #fff;
   font-size: 1rem;
+  overflow: hidden;
+
+  @include part(text) {
+    position: relative;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+
+    @include option(show) {
+      animation-name: show;
+    }
+  }
 }
 
 @include component(credit) {
@@ -131,6 +136,18 @@ body {
   }
 }
 
+@include tweak(luminous) {
+  transition: all 0.3s ease-in-out;
+
+  &:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+  }
+}
+
+list, message {
+  display: block;
+  overflow: hidden;
+}
 
 list {
   position: relative;
@@ -141,5 +158,25 @@ list {
   ul {
     margin: 0;
     padding: 0;
+  }
+}
+
+@keyframes show {
+  0% {
+    top: -2rem;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes hidden {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: 2rem;
   }
 }

@@ -4,10 +4,11 @@ var riot = require('riot');
 
 require('./tag/search.tag');
 require('./tag/list.tag');
+require('./tag/message.tag');
 
 var api = {
   uri: 'https://auc-cat.herokuapp.com/',
-  observer: new Results()
+  observer: new Observer()
 };
 
 if (process.env.NODE_ENV === 'development') {
@@ -16,11 +17,16 @@ if (process.env.NODE_ENV === 'development') {
 
 riot.mount('search', api);
 var listTags = riot.mount('list');
+var messageTags =riot.mount('message');
 
-function Results() {
+function Observer() {
   riot.observable(this);
 
-  this.on('update', data => {
+  this.on('listUpdate', data => {
     listTags[0].update(data);
+  });
+
+  this.on('messageUpdate', text => {
+    messageTags[0].update(text);
   });
 }
